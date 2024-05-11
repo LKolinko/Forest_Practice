@@ -131,9 +131,9 @@ void TreeDrawer::Draw() {
                     continue;
                 }
                 sf::VertexArray lines(sf::Lines, 2);
-                lines[0].position = sf::Vector2f(point->pos.x / zoom + RADIUS / zoom,
-                                                 point->pos.y / zoom + RADIUS / zoom);
-                lines[1].position = sf::Vector2f(u->pos.x / zoom + RADIUS / zoom, u->pos.y / zoom + RADIUS / zoom);
+                lines[0].position = sf::Vector2f(point->pos.x / zoom + RADIUS / zoom + shift.x,
+                                                 point->pos.y / zoom + RADIUS / zoom + shift.y);
+                lines[1].position = sf::Vector2f(u->pos.x / zoom + RADIUS / zoom + shift.x, u->pos.y / zoom + RADIUS / zoom + shift.y);
                 lines[0].color = sf::Color::Black;
                 lines[1].color = sf::Color::Black;
                 texture.draw(lines);
@@ -142,7 +142,7 @@ void TreeDrawer::Draw() {
 
         for (auto point: points) {
             sf::CircleShape vertex;
-            vertex.setPosition({ point->pos.x / (float)zoom, point->pos.y / (float)zoom });
+            vertex.setPosition({ point->pos.x / (float)zoom + shift.x, point->pos.y / (float)zoom + shift.y });
             vertex.setRadius(RADIUS / zoom);
             vertex.setFillColor(point->color);
             texture.draw(vertex);
@@ -152,8 +152,8 @@ void TreeDrawer::Draw() {
             text.setFont(font);
             text.setCharacterSize((int) (RADIUS / zoom / pow(point->GetData().size(), 0.5)));
             text.setString(point->GetData());
-            text.setPosition({point->pos.x / zoom + RADIUS / zoom - text.getLocalBounds().width / 2,
-                              point->pos.y / zoom + RADIUS / zoom - text.getLocalBounds().height});
+            text.setPosition({point->pos.x / zoom + RADIUS / zoom - text.getLocalBounds().width / 2 + shift.x,
+                              point->pos.y / zoom + RADIUS / zoom - text.getLocalBounds().height + shift.y});
             texture.draw(text);
         }
     }
@@ -340,6 +340,7 @@ void TreeDrawer::SetActive(bool flag, int f) {
         ColActive = sf::Color({ 189, 180, 191 });
     } else {
         ColActive = sf::Color::White;
+        shift = { 0, 0 };
     }
 }
 
@@ -373,4 +374,9 @@ void TreeDrawer::SetFullPos(sf::Vector2f pos_) {
 
 int TreeDrawer::GetFull() {
     return fullScreen;
+}
+
+void TreeDrawer::Scroll(std::pair<int, int> a) {
+    shift.y += (float)a.first * 5;
+    shift.x += (float)a.second * 5;
 }

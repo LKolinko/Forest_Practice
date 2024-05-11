@@ -37,6 +37,7 @@ public:
     void SetActive(bool flag, int f);
     bool getActive();
     int GetFull();
+    void Scroll(std::pair<int, int> a);
 private:
 
     void SetSize_(sf::Vector2u size_);
@@ -58,7 +59,7 @@ private:
     std::vector<Node*> AllNodes(Node* v);
     std::chrono::steady_clock::time_point prev;
 
-    sf::Vector2f pos, pos_rt;
+    sf::Vector2f pos, pos_rt, shift = { 0, 0 };
     sf::Vector2u size, size_rt;
     sf::RenderTexture texture;
 

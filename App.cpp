@@ -151,6 +151,15 @@ void App::EventHandler(sf::Event& event) {
                 table_->Scroll(std::make_pair((int) event.mouseWheelScroll.delta, 0));
             }
         }
+        for (auto u : drawers_) {
+            if (u->isMouseIn() && u->getActive()) {
+                if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+                    u->Scroll(std::make_pair((int) event.mouseWheelScroll.delta, 0));
+                } else if (event.mouseWheelScroll.wheel == sf::Mouse::HorizontalWheel) {
+                    u->Scroll(std::make_pair(0, (int) event.mouseWheelScroll.delta));
+                }
+            }
+        }
     }
 
     if (event.type == sf::Event::MouseButtonReleased) {
