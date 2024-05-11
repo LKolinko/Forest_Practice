@@ -68,6 +68,11 @@ void App::EventHandler(sf::Event& event) {
         Screen::GetInstance()->window->close();
     }
 
+    for (int i = 0; i < drawers_.size(); ++i) {
+        auto q = drawers_[i]->Delete();
+        RemoveVertex(i, q);
+    }
+
     if (event.type == sf::Event::Resized) {
         sf::Vector2u size = sf::Vector2u(event.size.width, event.size.height);
         Screen::GetInstance()->window->setView(sf::View(sf::Vector2f((float) size.x / 2.f, (float) size.y / 2.f),
@@ -267,6 +272,27 @@ void App::AddVertex(std::string value) {
         drawers_[2]->SetRoot(splay.GetRoot());
     }
     if (drawers_[3]->getActive()) {
+
+    }
+}
+
+void App::RemoveVertex(int i, TreeDrawer::Node *q) {
+    if (q == nullptr) {
+        return;
+    }
+    if (i == 0) {
+        AVL.Erase(q->val);
+        drawers_[0]->SetRoot(AVL.getRoot());
+    }
+    if (i == 1) {
+        treap.Erase(q->val);
+        drawers_[1]->SetRoot(treap.GetRoot());
+    }
+    if (i == 2) {
+
+        drawers_[2]->SetRoot(splay.GetRoot());
+    }
+    if (i == 3) {
 
     }
 }

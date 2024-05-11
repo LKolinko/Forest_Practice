@@ -14,6 +14,7 @@ public:
 private:
     void AddVertex(std::string value);
     void AddMTVertex();
+    void RemoveVertex(int i, TreeDrawer::Node* q);
     std::chrono::steady_clock::time_point prev;
     void EventHandler(sf::Event& event);
     void ReWrite();

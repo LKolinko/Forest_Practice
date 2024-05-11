@@ -37,8 +37,11 @@ public:
     void SetActive(bool flag, int f);
     bool getActive();
     int GetFull();
+    Node* Delete();
     void Scroll(std::pair<int, int> a);
 private:
+
+    Node* DeleteVertex = nullptr;
 
     void SetSize_(sf::Vector2u size_);
     void SetPos_(sf::Vector2f pos_);

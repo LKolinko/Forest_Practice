@@ -94,8 +94,6 @@ bool Table::isMouseOver(sf::RenderWindow &window) {
 
 void Table::Scroll(std::pair<int, int> a) {
     Start.y -= (float)a.first * 5;
-    //Start.x -= (float)a.second * 5;
-    //Start.x = std::max(Start.x, (float)0);
     Start.y = std::max(Start.y, (float)0);
 }
 

@@ -21,6 +21,7 @@ public:
     };
     node* GetRoot();
     void Insert(int64_t val);
+    void Erase(int64_t val);
 private:
     node* root = nullptr;
     std::pair<node*, node*> split(node* a, int64_t val);

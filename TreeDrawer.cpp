@@ -122,6 +122,17 @@ void TreeDrawer::Draw() {
 
     if (root) {
         auto points = AllNodes(root);
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            for (auto u : points) {
+                int mouseX = sf::Mouse::getPosition(*Screen::GetInstance()->window).x - pos.x;
+                int mouseY = sf::Mouse::getPosition(*Screen::GetInstance()->window).y - pos.y;
+                sf::Vector2f o = { u->pos.x / zoom + RADIUS / zoom / 2, u->pos.y / zoom + RADIUS / zoom / 2 };
+                if (fabs(mouseX - o.x) <= RADIUS / zoom && fabs(mouseY - o.y) <= RADIUS / zoom) {
+                    DeleteVertex = u;
+                    break;
+                }
+            }
+        }
         Phisic(points);
         for (auto point: points) {
             std::vector<Node *> Child = {point->GetLeft(), point->GetRight()};
@@ -191,7 +202,9 @@ void TreeDrawer::SetRoot(TreeDrawer::Node *vertex) {
     if (root) {
         root->pos = GetPoint();
     }
-    vertex->pos = sf::Vector2f((size.x / 2 - RADIUS / zoom) * zoom, 40);
+    if (vertex != nullptr) {
+        vertex->pos = sf::Vector2f((size.x / 2 - RADIUS / zoom) * zoom, 40);
+    }
     root = vertex;
 }
 
@@ -379,4 +392,10 @@ int TreeDrawer::GetFull() {
 void TreeDrawer::Scroll(std::pair<int, int> a) {
     shift.y += (float)a.first * 5;
     shift.x += (float)a.second * 5;
+}
+
+TreeDrawer::Node *TreeDrawer::Delete() {
+    auto q = DeleteVertex;
+    DeleteVertex = nullptr;
+    return q;
 }

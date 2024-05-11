@@ -60,6 +60,14 @@ void Treap::Insert(int64_t val) {
     root = merge(low, merge(new_node, up));
 }
 
+void Treap::Erase(int64_t val) {
+    auto[low, up] = split(root, val);
+    auto[lw, eq] = split(low, val - 1);
+    delete eq;
+    root = merge(lw, up);
+}
+
+
 Treap::node *Treap::GetRoot() {
     return root;
 }
