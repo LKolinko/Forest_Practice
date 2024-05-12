@@ -25,8 +25,11 @@ public:
     node* GetRoot();
     void Insert(int64_t val);
 private:
+    node* find(node* v, int64_t val);
+    void LeftRotate(node* a);
+    void RightRotate(node* a);
     void InsRebalance(node* a);
-    int GetColor(node* a);
+    sf::Color GetColor(node* a);
     node* root = nullptr;
 
     void Ins(node* v, int64_t val);
