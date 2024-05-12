@@ -126,7 +126,7 @@ void TreeDrawer::Draw() {
             for (auto u : points) {
                 int mouseX = sf::Mouse::getPosition(*Screen::GetInstance()->window).x - pos.x;
                 int mouseY = sf::Mouse::getPosition(*Screen::GetInstance()->window).y - pos.y;
-                sf::Vector2f o = { u->pos.x / zoom + shift.x + RADIUS / zoom / 2, u->pos.y / zoom + shift.y + RADIUS / zoom / 2 };
+                sf::Vector2f o = { u->pos.x / zoom + shift.x + RADIUS / zoom, u->pos.y / zoom + shift.y + RADIUS / zoom };
                 if ((mouseX - o.x) * (mouseX - o.x) + (mouseY - o.y) * (mouseY - o.y) <= RADIUS / zoom * RADIUS / zoom) {
                     DeleteVertex = u;
                     break;

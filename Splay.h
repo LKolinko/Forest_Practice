@@ -17,12 +17,31 @@ public:
     };
 
     void Insert(int64_t value) {
-        node* q = new node(value);
-        if (!root) {
-            root = q;
+        if (!find(root, value)) {
+            node* q = new node(value);
+            if (!root) {
+                root = q;
+                return;
+            }
+            Ins(root, q);
+        }
+    }
+
+    void Erase(int64_t val) {
+        auto q = find(root, val);
+        if (!q) {
             return;
         }
-        Ins(root, q);
+        root = splay(q, root);
+        auto a = root->l, b = root->r;
+        if (a) {
+            a->prev = nullptr;
+        }
+        if (b) {
+            b->prev = nullptr;
+        }
+        root = merge(a, b);
+        delete q;
     }
 
     node* GetRoot() {
@@ -30,6 +49,41 @@ public:
     }
 private:
     node* root = nullptr;
+
+    node* merge(node* a, node* b) {
+        a = splay(findMax(a), a);
+        if (a) {
+            a->r = b;
+            if (b) {
+                b->prev = a;
+            }
+            return a;
+        }
+        return b;
+    }
+
+    node* findMax(node* v) {
+        if (v == nullptr) {
+            return nullptr;
+        }
+        if (v->r == nullptr) {
+            return v;
+        }
+        return findMax(v->r);
+    }
+
+    node* find(node* v, int64_t val) {
+        if (!v) {
+            return nullptr;
+        }
+        if (v->val == val) {
+            return v;
+        }
+        if (v->val > val) {
+            return find(v->l, val);
+        }
+        return find(v->r, val);
+    }
 
     void LeftRotate(node* a) {
         node* p = a->prev;
@@ -69,19 +123,20 @@ private:
             a->l->prev = a;
         }
     }
-    void splay(node* v) {
+    node* splay(node* v, node* rt) {
+        if (v == nullptr) {
+            return nullptr;
+        }
         while (true) {
             if (v->prev == nullptr) {
-                root = v;
                 break;
             }
             if (v->prev->prev == nullptr) {
-                if (root->l == v) {
-                    RightRotate(root);
+                if (rt->l == v) {
+                    RightRotate(rt);
                 } else {
-                    LeftRotate(root);
+                    LeftRotate(rt);
                 }
-                root = v;
                 break;
             }
             if (v->prev->l == v && v->prev->prev->l == v->prev) {
@@ -102,6 +157,7 @@ private:
                 LeftRotate(v->prev);
             }
         }
+        return v;
     }
 
     void Ins(node* v, node* val) {
@@ -110,7 +166,7 @@ private:
                 v->l = val;
                 val->prev = v;
 
-                splay(val);
+                root = splay(val, root);
                 return;
             }
             Ins(v->l, val);
@@ -118,7 +174,7 @@ private:
             if (v->r == nullptr) {
                 v->r = val;
                 val->prev = v;
-                splay(val);
+                root = splay(val, root);
                 return;
             }
             Ins(v->r, val);

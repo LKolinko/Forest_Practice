@@ -272,7 +272,8 @@ void App::AddVertex(std::string value) {
         drawers_[2]->SetRoot(splay.GetRoot());
     }
     if (drawers_[3]->getActive()) {
-
+        rb_tree_.Insert(std::stol(value));
+        drawers_[3]->SetRoot(rb_tree_.GetRoot());
     }
 }
 
@@ -289,7 +290,7 @@ void App::RemoveVertex(int i, TreeDrawer::Node *q) {
         drawers_[1]->SetRoot(treap.GetRoot());
     }
     if (i == 2) {
-
+        splay.Erase(q->val);
         drawers_[2]->SetRoot(splay.GetRoot());
     }
     if (i == 3) {

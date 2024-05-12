@@ -1,5 +1,6 @@
 #include "SFML/Graphics.hpp"
 #include "Screen.h"
+#include "RBTree.h"
 #include "AVL.h"
 #include "Table.h"
 #include "Treap.h"
@@ -21,6 +22,7 @@ private:
     AVLTree AVL;
     Treap treap;
     SplayTree splay;
+    RBTree rb_tree_;
     Table* table_;
     int fullInd = -1;
     std::vector<TreeDrawer*> drawers_;

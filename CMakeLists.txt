@@ -27,6 +27,8 @@ add_executable(Forest main.cpp
         Splay.h
         Table.cpp
         Table.h
+        RBTree.cpp
+        RBTree.h
 )
 
 target_link_libraries(Forest PRIVATE sfml-graphics)
