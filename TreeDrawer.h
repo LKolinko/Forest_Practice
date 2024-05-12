@@ -73,8 +73,8 @@ private:
 
     float zoom = 1;
     float RADIUS = 40;
-    float GRAVITY = 10;
-    float Lateral = 2;
-    float elasticity = 300;
-    float K = 0.05;
+    float GRAVITY = 20;
+    float Lateral = 3;
+    float elasticity = 100;
+    float K = 0.07;
 };

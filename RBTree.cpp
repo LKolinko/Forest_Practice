@@ -139,7 +139,9 @@ void RBTree::InsRebalance(node *a) {
         }
     }
 
-    if (a->prev->prev == nullptr) {
+    if (a->prev == nullptr) {
+        root = a;
+    } else if (a->prev->prev == nullptr) {
         root = a->prev;
     }
 }

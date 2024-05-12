@@ -224,6 +224,25 @@ void TreeDrawer::Phisic(std::vector<Node*>& points) {
     }
 
     std::vector<Node*> Child = { root->GetLeft(), root->GetRight() };
+
+    auto power = std::max((Child[0] ? Child[0]->size : 0), (Child[1] ? Child[1]->size : 0));
+
+    if (Child[0]) {
+        if (Child[0]->isLeft) {
+            Child[0]->speed += sf::Vector2f(-pow(Lateral * (float)power, 1.1), (float)power);
+        } else {
+            Child[0]->speed += sf::Vector2f(pow(Lateral * (float)power, 1.1), (float)power);
+        }
+    }
+
+    if (Child[1]) {
+        if (Child[1]->isLeft) {
+            Child[1]->speed += sf::Vector2f(-pow(Lateral * (float)power, 1.1), (float)power);
+        } else {
+            Child[1]->speed += sf::Vector2f(pow(Lateral * (float)power, 1.1), (float)power);
+        }
+    }
+
     for (auto u : Child) {
         if (u == nullptr) {
             continue;
@@ -239,13 +258,26 @@ void TreeDrawer::Phisic(std::vector<Node*>& points) {
         }
         sf::Vector2f Resultant_Force = { 0, GRAVITY };
 
-        if (point->isLeft) {
-            Resultant_Force += sf::Vector2f(-Lateral * (float)point->size, (float)point->size);
-        } else {
-            Resultant_Force += sf::Vector2f(Lateral * (float)point->size, (float)point->size);
+        std::vector<Node*> Child = { point->GetLeft(), point->GetRight() };
+
+        auto power = std::max((Child[0] ? Child[0]->size : 0), (Child[1] ? Child[1]->size : 0));
+
+        if (Child[0]) {
+            if (Child[0]->isLeft) {
+                Child[0]->speed += sf::Vector2f(-pow(Lateral * (float)power, 1.1), (float)power);
+            } else {
+                Child[0]->speed += sf::Vector2f(pow(Lateral * (float)power, 1.1), (float)power);
+            }
         }
 
-        std::vector<Node*> Child = { point->GetLeft(), point->GetRight() };
+        if (Child[1]) {
+            if (Child[1]->isLeft) {
+                Child[1]->speed += sf::Vector2f(-pow(Lateral * (float)power, 1.1), (float)power);
+            } else {
+                Child[1]->speed += sf::Vector2f(pow(Lateral * (float)power, 1.1), (float)power);
+            }
+        }
+
         for (auto u : Child) {
             if (u == nullptr) {
                 continue;
