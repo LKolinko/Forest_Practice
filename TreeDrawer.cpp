@@ -9,7 +9,7 @@ TreeDrawer::Node::Node(int64_t v) {
     size = 1;
 }
 
-void TreeDrawer::Draw() {
+void TreeDrawer::Draw(sf::Event& event) {
 
     if (fullScreen == 1) {
         if (fabs(pos.x - full_pos.x) < fullStep) {
@@ -122,7 +122,7 @@ void TreeDrawer::Draw() {
 
     if (root) {
         auto points = AllNodes(root);
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (event.type == sf::Event::MouseButtonReleased) {
             for (auto u : points) {
                 int mouseX = sf::Mouse::getPosition(*Screen::GetInstance()->window).x - pos.x;
                 int mouseY = sf::Mouse::getPosition(*Screen::GetInstance()->window).y - pos.y;

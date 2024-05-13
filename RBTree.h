@@ -21,15 +21,19 @@ public:
             return std::to_string(val);
         }
         node *l = nullptr, *r = nullptr, *prev = nullptr;
+        bool is_empty = false;
     };
     node* GetRoot();
     void Insert(int64_t val);
+    void Erase(int64_t val);
 private:
     node* find(node* v, int64_t val);
     void LeftRotate(node* a);
     void RightRotate(node* a);
     void InsRebalance(node* a);
+    void Delete(int64_t val);
     sf::Color GetColor(node* a);
+    node* GetMin(node* a);
     node* root = nullptr;
 
     void Ins(node* v, int64_t val);

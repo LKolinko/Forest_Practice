@@ -4,7 +4,7 @@
 
 #include "App.h"
 
-void App::ReWrite() {
+void App::ReWrite(sf::Event& event) {
     Screen::GetInstance()->window->clear(sf::Color::White);
 
     int flag = 0;
@@ -22,7 +22,7 @@ void App::ReWrite() {
             if (i == fullInd) {
                 continue;
             }
-            drawers_[i]->Draw();
+            drawers_[i]->Draw(event);
         }
     }
 
@@ -33,7 +33,7 @@ void App::ReWrite() {
             }
             drawers_[i]->SetActive(1, 0);
         }
-        drawers_[fullInd]->Draw();
+        drawers_[fullInd]->Draw(event);
     }
 
     for (auto u : buttons) {
@@ -47,17 +47,24 @@ void App::ReWrite() {
 }
 
 void App::Run() {
-    ReWrite();
+    sf::Event event{};
+    ReWrite(event);
     while (Screen::GetInstance()->window->isOpen()) {
         auto time = std::chrono::steady_clock::now();
-        sf::Event event;
 
         if (Screen::GetInstance()->window->pollEvent(event)) {
+            if (event.type == sf::Event::MouseButtonReleased) {
+                ReWrite(event);
+                prev = time;
+            }
             EventHandler(event);
+            if (event.type == sf::Event::MouseButtonReleased) {
+                event = sf::Event();
+            }
         }
 
         if (std::chrono::duration_cast<std::chrono::milliseconds>(time - prev).count() >= 15) {
-            ReWrite();
+            ReWrite(event);
             prev = time;
         }
     }
@@ -246,13 +253,6 @@ App::App() {
 
     table_ = new Table(sf::Vector2f(size.x * 0.17, size.y * 0.67), sf::Vector2f(5, size.y * 0.31 + 5), sf::Color(58, 183, 149),
         sf::Color(152, 193, 217), 5, 10, { 100, 30 }, font);
-
-//    for (ll i = 0; i < 19; ++i) {
-//        AVL.Add(i);
-//        treap.Insert(i);
-//    }
-//    drawers_[1]->SetRoot(treap.GetRoot());
-//    drawers_[0]->SetRoot(AVL.getRoot());
 }
 
 void App::AddVertex(std::string value) {
@@ -294,7 +294,8 @@ void App::RemoveVertex(int i, TreeDrawer::Node *q) {
         drawers_[2]->SetRoot(splay.GetRoot());
     }
     if (i == 3) {
-
+        rb_tree_.Erase(q->val);
+        drawers_[3]->SetRoot(rb_tree_.GetRoot());
     }
 }
 

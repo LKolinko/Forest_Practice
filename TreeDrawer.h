@@ -15,8 +15,6 @@ public:
     TreeDrawer(sf::Vector2u size_, sf::Vector2f pos_, std::string title, sf::Vector2f full_p, sf::Vector2u full_s);
     struct Node {
         Node(int64_t v);
-
-        friend class TreesDrawer;
         virtual Node *GetLeft() const = 0;
         virtual Node *GetRight() const = 0;
         virtual std::string GetData() const = 0;
@@ -27,7 +25,7 @@ public:
         sf::Vector2f pos = GetPoint();
     };
     bool isMouseIn();
-    void Draw();
+    void Draw(sf::Event& event);
     void SetRoot(Node* vertex);
     void setZoom(float delta);
     void SetSize(sf::Vector2u size_);
@@ -73,8 +71,8 @@ private:
 
     float zoom = 1;
     float RADIUS = 40;
-    float GRAVITY = 20;
-    float Lateral = 3;
+    float GRAVITY = 25;
+    float Lateral = 3.15;
     float elasticity = 100;
     float K = 0.07;
 };

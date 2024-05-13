@@ -18,7 +18,7 @@ private:
     void RemoveVertex(int i, TreeDrawer::Node* q);
     std::chrono::steady_clock::time_point prev;
     void EventHandler(sf::Event& event);
-    void ReWrite();
+    void ReWrite(sf::Event& event);
     AVLTree AVL;
     Treap treap;
     SplayTree splay;
