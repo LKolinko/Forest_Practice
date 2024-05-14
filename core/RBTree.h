@@ -34,7 +34,7 @@ private:
     void Delete(int64_t val);
     sf::Color GetColor(node* a);
     node* GetMin(node* a);
-    node* root = nullptr;
+    node* root_ = nullptr;
 
     void Ins(node* v, int64_t val);
 };

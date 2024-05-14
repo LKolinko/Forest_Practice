@@ -4,9 +4,9 @@
 #include "vector"
 #include "chrono"
 #include "SFML/Graphics.hpp"
-#include "Screen.h"
-#include "RoundedRectangle.h"
-#include "Button.h"
+#include "../app/Screen.h"
+#include "../app/RoundedRectangle.h"
+#include "../app/Button.h"
 #include "queue"
 
 class TreeDrawer {

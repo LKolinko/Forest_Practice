@@ -2,7 +2,7 @@
 // Created by lkolinko on 5/12/24.
 //
 
-#include "RBTree.h"
+#include "../core/RBTree.h"
 
 RBTree::node::node(int64_t v) : Node(v) {
     color = sf::Color::Red;
@@ -30,16 +30,16 @@ void RBTree::Ins(node* v, int64_t val) {
 }
 
 void RBTree::Insert(int64_t val) {
-    if (find(root, val) != nullptr) {
+    if (find(root_, val) != nullptr) {
         return;
     }
-    if (root == nullptr) {
-        root = new node(val);
+    if (root_ == nullptr) {
+        root_ = new node(val);
     } else {
-        Ins(root, val);
+        Ins(root_, val);
     }
-    if (root->color == sf::Color::Red) {
-        root->color = sf::Color::Black;
+    if (root_->color == sf::Color::Red) {
+        root_->color = sf::Color::Black;
     }
 }
 void RBTree::Erase(int64_t val) {
@@ -84,7 +84,7 @@ void RBTree::LeftRotate(node *a) {
         a->r->prev = a;
     }
     if (r->prev == nullptr) {
-        root = r;
+        root_ = r;
     }
 }
 
@@ -113,7 +113,7 @@ void RBTree::RightRotate(node *a) {
         a->l->prev = a;
     }
     if (l->prev == nullptr) {
-        root = l;
+        root_ = l;
     }
 }
 
@@ -152,20 +152,20 @@ void RBTree::InsRebalance(node *a) {
     }
 
     if (a->prev == nullptr) {
-        root = a;
+        root_ = a;
     } else if (a->prev->prev == nullptr) {
-        root = a->prev;
+        root_ = a->prev;
     }
 }
 
 void RBTree::Delete(int64_t val) {
-    auto q = find(root, val);
+    auto q = find(root_, val);
     auto replase = GetMin(q->r);
-    if (replase == nullptr && q == root) {
-        root = (root->l ? root->l : nullptr);
-        if (root != nullptr) {
-            root->prev = nullptr;
-            root->color = sf::Color::Black;
+    if (replase == nullptr && q == root_) {
+        root_ = (root_->l ? root_->l : nullptr);
+        if (root_ != nullptr) {
+            root_->prev = nullptr;
+            root_->color = sf::Color::Black;
         }
         delete q;
         return;
@@ -197,7 +197,7 @@ void RBTree::Delete(int64_t val) {
     while (replase->color == sf::Color::Magenta) {
         if (replase->prev == nullptr) {
             replase->color = sf::Color::Black;
-            root = replase;
+            root_ = replase;
             break;
         }
         // проверка положения
@@ -296,7 +296,7 @@ void RBTree::Delete(int64_t val) {
 }
 
 RBTree::node *RBTree::GetRoot() {
-    return root;
+    return root_;
 }
 
 sf::Color RBTree::GetColor(node *a) {

@@ -2,7 +2,7 @@
 // Created by lkolinko on 4/28/24.
 //
 
-#include "TreeDrawer.h"
+#include "../core/TreeDrawer.h"
 
 TreeDrawer::Node::Node(int64_t v) {
     val = v;

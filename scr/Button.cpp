@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "../app/Button.h"
 
 void Button::Draw(sf::RenderWindow &window) {
     text.setFont(font_);

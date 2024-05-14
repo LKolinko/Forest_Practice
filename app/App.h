@@ -1,12 +1,12 @@
-#include "SFML/Graphics.hpp"
-#include "Screen.h"
-#include "RBTree.h"
-#include "AVL.h"
-#include "Table.h"
-#include "Treap.h"
-#include "Splay.h"
-#include "TextBox.h"
+#include "../core/AVL.h"
+#include "../core/RBTree.h"
+#include "../core/Splay.h"
+#include "../core/Treap.h"
+#include "../cmake-build-debug/_deps/sfml-src/include/SFML/Graphics.hpp"
 #include "Button.h"
+#include "Screen.h"
+#include "Table.h"
+#include "TextBox.h"
 
 class App {
 public:

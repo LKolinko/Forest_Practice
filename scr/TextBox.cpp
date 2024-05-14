@@ -1,4 +1,4 @@
-#include "TextBox.h"
+#include "../app/TextBox.h"
 
 TextBox::TextBox(sf::Vector2f size, sf::Vector2f pos, sf::Color color, sf::Color pressed, sf::Font &font,
                  std::string str_title, float radius) {

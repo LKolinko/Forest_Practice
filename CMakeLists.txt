@@ -10,25 +10,25 @@ FetchContent_MakeAvailable(SFML)
 set(CMAKE_CXX_STANDARD 23)
 
 add_executable(Forest main.cpp
-        AVL.h
-        Screen.h
-        Singleton.h
-        TreeDrawer.cpp
-        TreeDrawer.h
-        RoundedRectangle.cpp
-        App.cpp
-        App.h
-        Treap.cpp
-        Treap.h
-        Button.h
-        Button.cpp
-        TextBox.cpp
-        TextBox.cpp
-        Splay.h
-        Table.cpp
-        Table.h
-        RBTree.cpp
-        RBTree.h
+        core/AVL.h
+        app/Screen.h
+        app/Singleton.h
+        scr/TreeDrawer.cpp
+        core/TreeDrawer.h
+        scr/RoundedRectangle.cpp
+        scr/App.cpp
+        app/App.h
+        scr/Treap.cpp
+        core/Treap.h
+        app/Button.h
+        scr/Button.cpp
+        scr/TextBox.cpp
+        scr/TextBox.cpp
+        core/Splay.h
+        scr/Table.cpp
+        app/Table.h
+        scr/RBTree.cpp
+        core/RBTree.h
 )
 
 target_link_libraries(Forest PRIVATE sfml-graphics)

@@ -2,7 +2,7 @@
 // Created by lkolinko on 4/30/24.
 //
 
-#include "Treap.h"
+#include "../core/Treap.h"
 
 Treap::node::node(int64_t v) : Node(v) {
     std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());

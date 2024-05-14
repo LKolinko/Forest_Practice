@@ -2,7 +2,7 @@
 // Created by lkolinko on 4/30/24.
 //
 
-#include "App.h"
+#include "../app/App.h"
 
 void App::ReWrite(sf::Event& event) {
     Screen::GetInstance()->window->clear(sf::Color::White);

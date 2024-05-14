@@ -1,4 +1,4 @@
-#include "RoundedRectangle.h"
+#include "../app/RoundedRectangle.h"
 RoundedRectangle::RoundedRectangle(sf::Color color, sf::Vector2f size, sf::Vector2f pos, float radius) {
     LU.setRadius(radius);
     LD.setRadius(radius);
