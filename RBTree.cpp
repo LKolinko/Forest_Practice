@@ -170,6 +170,12 @@ void RBTree::Delete(int64_t val) {
         delete q;
         return;
     }
+    if (replase == nullptr && q->l) {
+        RightRotate(q);
+        q->prev->r = nullptr;
+        delete q;
+        return;
+    }
     if (replase == nullptr) {
         replase = q;
     }

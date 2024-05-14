@@ -259,20 +259,21 @@ void App::AddVertex(std::string value) {
     if (value.empty()) {
         return;
     }
+    int val = std::stol(value);
     if (drawers_[0]->getActive()) {
-        AVL.Add(std::stol(value));
+        AVL.Add(val);
         drawers_[0]->SetRoot(AVL.getRoot());
     }
     if (drawers_[1]->getActive()) {
-        treap.Insert(std::stol(value));
+        treap.Insert(val);
         drawers_[1]->SetRoot(treap.GetRoot());
     }
     if (drawers_[2]->getActive()) {
-        splay.Insert(std::stol(value));
+        splay.Insert(val);
         drawers_[2]->SetRoot(splay.GetRoot());
     }
     if (drawers_[3]->getActive()) {
-        rb_tree_.Insert(std::stol(value));
+        rb_tree_.Insert(val);
         drawers_[3]->SetRoot(rb_tree_.GetRoot());
     }
 }
@@ -301,6 +302,7 @@ void App::RemoveVertex(int i, TreeDrawer::Node *q) {
 
 void App::AddMTVertex() {
     std::mt19937 rng(std::chrono::high_resolution_clock().now().time_since_epoch().count());
+    std::uniform_int_distribution<> gen(-10000, 10000);
     int cnt = 0;
     auto u = textboxs[1]->get_text();
     if (!u.empty()) {
@@ -308,7 +310,8 @@ void App::AddMTVertex() {
     }
     std::vector<std::string> added;
     for (int i = 0; i < cnt; ++i) {
-        auto value = std::to_string(rng());
+        auto val = gen(rng);
+        auto value = std::to_string(val);
         added.push_back(value);
         AddVertex(value);
     }
