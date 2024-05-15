@@ -13,21 +13,21 @@ add_executable(Forest main.cpp
         core/AVL.h
         app/Screen.h
         app/Singleton.h
-        scr/TreeDrawer.cpp
+        src/TreeDrawer.cpp
         core/TreeDrawer.h
-        scr/RoundedRectangle.cpp
-        scr/App.cpp
+        src/RoundedRectangle.cpp
+        src/App.cpp
         app/App.h
-        scr/Treap.cpp
+        src/Treap.cpp
         core/Treap.h
         app/Button.h
-        scr/Button.cpp
-        scr/TextBox.cpp
-        scr/TextBox.cpp
+        src/Button.cpp
+        src/TextBox.cpp
+        src/TextBox.cpp
         core/Splay.h
-        scr/Table.cpp
+        src/Table.cpp
         app/Table.h
-        scr/RBTree.cpp
+        src/RBTree.cpp
         core/RBTree.h
 )
 
